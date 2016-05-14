@@ -1,5 +1,7 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
-// Use of this source code is governed by the MIT license, which can be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
+// reserved.
+// Use of this source code is governed by the MIT license, which can 
+// be found in
 // the LICENSE file.
 
 package tbotapi
@@ -7,7 +9,8 @@ package tbotapi
 import "fmt"
 import "sort"
 
-// BaseResponse contains the basic fields contained in every API response
+// BaseResponse contains the basic fields contained in every API 
+// response
 type baseResponse struct {
 	Ok          bool   `json:"ok"`
 	Description string `json:"description"`
@@ -96,7 +99,8 @@ type Document struct {
 	MimeType  string    `json:"mime_type"`
 }
 
-// FileBase contains all the fields present in every file-like API response
+// FileBase contains all the fields present in every file-like 
+// API response
 type FileBase struct {
 	ID   string `json:"file_id"`
 	Size int    `json:"file_size"`
@@ -108,7 +112,8 @@ type File struct {
 	Path string `json:"file_path"`
 }
 
-// FileResponse represents the response sent by the API when requesting a file for download
+// FileResponse represents the response sent by the API when requesting 
+// a file for download
 type FileResponse struct {
 	baseResponse
 	File File `json:"result"`
@@ -120,7 +125,8 @@ type Location struct {
 	Latitude  float32 `json:"latitude"`
 }
 
-// MessageResponse represents the response sent by the API on successful messages sent
+// MessageResponse represents the response sent by the API on successful 
+// messages sent
 type MessageResponse struct {
 	baseResponse
 	Message Message `json:"result"`
@@ -143,7 +149,8 @@ func (m *Message) IsReply() bool {
 }
 
 // Type determines the type of the message.
-// Note that, for all these types, messages can still be replies or forwarded.
+// Note that, for all these types, messages can still be replies 
+// or forwarded.
 func (m *Message) Type() MessageType {
 	if m.Text != nil {
 		return TextMessage
@@ -313,7 +320,8 @@ var messageTypes = map[MessageType]string{
 	UnknownMessage: "Unknown",
 }
 
-// IsChatAction checks if the MessageType is about changes in group chats
+// IsChatAction checks if the MessageType is about changes in group 
+// chats
 func (mt MessageType) IsChatAction() bool {
 	return mt > chatActionsBegin && mt < chatActionsEnd
 }
@@ -341,7 +349,8 @@ type Sticker struct {
 	Thumbnail PhotoSize `json:"thumb"`
 }
 
-// UpdateResponse represents the response sent by the API for a GetUpdates request
+// UpdateResponse represents the response sent by the API for a 
+// GetUpdates request
 type updateResponse struct {
 	baseResponse
 	Update []Update `json:"result"`
@@ -354,7 +363,8 @@ func (a byID) Len() int           { return len(a) }
 func (a byID) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a byID) Less(i, j int) bool { return a[i].ID < a[j].ID }
 
-// Sort sorts all the updates contained in an UpdateResponse by their ID
+// Sort sorts all the updates contained in an UpdateResponse by their 
+// ID
 func (resp *updateResponse) sort() {
 	sort.Sort(byID(resp.Update))
 }
@@ -408,7 +418,8 @@ func (t UpdateType) String() string {
 	return val
 }
 
-// UserResponse represents the response sent by the API on a GetMe request
+// UserResponse represents the response sent by the API on a GetMe 
+// request
 type UserResponse struct {
 	baseResponse
 	User User `json:"result"`
@@ -433,7 +444,8 @@ func (u User) String() string {
 	return fmt.Sprintf("%d/%s", u.ID, u.FirstName)
 }
 
-// UserProfilePhotosResponse represents the response sent by the API on a GetUserProfilePhotos request
+// UserProfilePhotosResponse represents the response sent by the 
+// API on a GetUserProfilePhotos request
 type UserProfilePhotosResponse struct {
 	baseResponse
 	UserProfilePhotos UserProfilePhotos `json:"result"`
@@ -471,14 +483,16 @@ type InlineQuery struct {
 	Offset string `json:"offset"` // offset of the results to be returned, can be controlled by the bot
 }
 
-// ChosenInlineResult represents a result of an inline query that was chosen by the user and sent to their chat partner
+// ChosenInlineResult represents a result of an inline query that 
+// was chosen by the user and sent to their chat partner
 type ChosenInlineResult struct {
 	ID    string `json:"result_id"` // unique identifier for the result that was chosen
 	From  User   `json:"from"`      // user that chose the result
 	Query string `json:"query"`     // query that was used to obtain the result
 }
 
-// CallbackQuery represents an incoming callback query from a button of an
+// CallbackQuery represents an incoming callback query from a button 
+// of an
 // inline keyboard.
 type CallbackQuery struct {
 	ID              string   `json:"id"`                // Unique identifier for this query

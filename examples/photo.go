@@ -1,5 +1,7 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
-// Use of this source code is governed by the MIT license, which can be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
+// reserved.
+// Use of this source code is governed by the MIT license, which can 
+// be found in
 // the LICENSE file.
 
 package main
@@ -25,21 +27,24 @@ func main() {
 				fmt.Println("Ignoring non-text message")
 				return
 			}
-			// Note: Bots cannot receive from channels, at least no text messages. So we don't have to distinguish anything here
+// Note: Bots cannot receive from channels, at least no text messages. 
+// So we don't have to distinguish anything here
 
-			// display the incoming message
-			// msg.Chat implements fmt.Stringer, so it'll display nicely
-			// we know it's a text message, so we can safely use the Message.Text pointer
+// display the incoming message
+// msg.Chat implements fmt.Stringer, so it'll display nicely
+// we know it's a text message, so we can safely use the Message.Text 
+// pointer
 			fmt.Printf("<-%d, From:\t%s, Text: %s \n", msg.ID, msg.Chat, *msg.Text)
 
-			// send a photo
+// send a photo
 			file, err := os.Open("data/example.png")
 			if err != nil {
 				fmt.Printf("Error opening file: %s\n", err)
 				return
 			}
 			defer file.Close()
-			// Note: Set at least a correct file extension, the API will check this
+// Note: Set at least a correct file extension, the API will check 
+// this
 			outMsg, err := api.NewOutgoingPhoto(tbotapi.NewRecipientFromChat(msg.Chat), "example.png", file).Send()
 
 			if err != nil {
@@ -56,6 +61,6 @@ func main() {
 		}
 	}
 
-	// run the bot, this will block
+// run the bot, this will block
 	boilerplate.RunBot(apiToken, updateFunc, "Photo", "Always responds to text messages with a picture")
 }

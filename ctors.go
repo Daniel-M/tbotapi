@@ -1,5 +1,7 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
-// Use of this source code is governed by the MIT license, which can be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
+// reserved.
+// Use of this source code is governed by the MIT license, which can 
+// be found in
 // the LICENSE file.
 
 package tbotapi
@@ -66,7 +68,8 @@ func (api *TelegramBotAPI) NewOutgoingVideo(recipient Recipient, fileName string
 	}
 }
 
-// NewOutgoingVideoResend creates a new outgoing video file for re-sending
+// NewOutgoingVideoResend creates a new outgoing video file 
+// for re-sending
 func (api *TelegramBotAPI) NewOutgoingVideoResend(recipient Recipient, fileID string) *OutgoingVideo {
 	return &OutgoingVideo{
 		outgoingMessageBase: outgoingMessageBase{
@@ -128,7 +131,8 @@ func (api *TelegramBotAPI) NewOutgoingSticker(recipient Recipient, fileName stri
 	}
 }
 
-// NewOutgoingStickerResend creates a new outgoing sticker message for re-sending
+// NewOutgoingStickerResend creates a new outgoing sticker message 
+// for re-sending
 func (api *TelegramBotAPI) NewOutgoingStickerResend(recipient Recipient, fileID string) *OutgoingSticker {
 	return &OutgoingSticker{
 		outgoingMessageBase: outgoingMessageBase{
@@ -159,7 +163,8 @@ func (api *TelegramBotAPI) NewOutgoingVoice(recipient Recipient, fileName string
 	}
 }
 
-// NewOutgoingVoiceResend creates a new outgoing voice note for re-sending
+// NewOutgoingVoiceResend creates a new outgoing voice note 
+// for re-sending
 func (api *TelegramBotAPI) NewOutgoingVoiceResend(recipient Recipient, fileID string) *OutgoingVoice {
 	return &OutgoingVoice{
 		outgoingMessageBase: outgoingMessageBase{
@@ -190,7 +195,8 @@ func (api *TelegramBotAPI) NewOutgoingAudio(recipient Recipient, fileName string
 	}
 }
 
-// NewOutgoingAudioResend creates a new outgoing audio file for re-sending
+// NewOutgoingAudioResend creates a new outgoing audio file 
+// for re-sending
 func (api *TelegramBotAPI) NewOutgoingAudioResend(recipient Recipient, fileID string) *OutgoingAudio {
 	return &OutgoingAudio{
 		outgoingMessageBase: outgoingMessageBase{
@@ -221,7 +227,8 @@ func (api *TelegramBotAPI) NewOutgoingDocument(recipient Recipient, fileName str
 	}
 }
 
-// NewOutgoingDocumentResend creates a new outgoing file for re-sending
+// NewOutgoingDocumentResend creates a new outgoing file for 
+// re-sending
 func (api *TelegramBotAPI) NewOutgoingDocumentResend(recipient Recipient, fileID string) *OutgoingDocument {
 	return &OutgoingDocument{
 		outgoingMessageBase: outgoingMessageBase{
@@ -261,7 +268,8 @@ func (api *TelegramBotAPI) NewOutgoingChatAction(recipient Recipient, action Cha
 	}
 }
 
-// NewOutgoingUserProfilePhotosRequest creates a new request for a users profile photos
+// NewOutgoingUserProfilePhotosRequest creates a new request for 
+// a users profile photos
 func (api *TelegramBotAPI) NewOutgoingUserProfilePhotosRequest(userID int) *OutgoingUserProfilePhotosRequest {
 	return &OutgoingUserProfilePhotosRequest{
 		api:    api,
@@ -269,7 +277,8 @@ func (api *TelegramBotAPI) NewOutgoingUserProfilePhotosRequest(userID int) *Outg
 	}
 }
 
-// NewOutgoingKickChatMember creates a request to kick a member from a group chat or channel.
+// NewOutgoingKickChatMember creates a request to kick a member 
+// from a group chat or channel.
 func (api *TelegramBotAPI) NewOutgoingKickChatMember(chat Recipient, userID int) *OutgoingKickChatMember {
 	return &OutgoingKickChatMember{
 		api:       api,
@@ -278,7 +287,8 @@ func (api *TelegramBotAPI) NewOutgoingKickChatMember(chat Recipient, userID int)
 	}
 }
 
-// NewOutgoingUnbanChatMember creates a request to unban a member of a group chat or channel.
+// NewOutgoingUnbanChatMember creates a request to unban a member 
+// of a group chat or channel.
 func (api *TelegramBotAPI) NewOutgoingUnbanChatMember(chat Recipient, userID int) *OutgoingUnbanChatMember {
 	return &OutgoingUnbanChatMember{
 		api:       api,
@@ -287,7 +297,8 @@ func (api *TelegramBotAPI) NewOutgoingUnbanChatMember(chat Recipient, userID int
 	}
 }
 
-// NewOutgoingCallbackQueryResponse creates a response to a callback query.
+// NewOutgoingCallbackQueryResponse creates a response to a callback 
+// query.
 func (api *TelegramBotAPI) NewOutgoingCallbackQueryResponse(queryID string) *OutgoingCallbackQueryResponse {
 	return &OutgoingCallbackQueryResponse{
 		api:             api,
