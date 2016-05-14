@@ -1,6 +1,6 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights
 // reserved.
-// Use of this source code is governed by the MIT license, which can 
+// Use of this source code is governed by the MIT license, which can
 // be found in
 // the LICENSE file.
 
@@ -27,12 +27,13 @@ func main() {
 				fmt.Println("Ignoring non-text message")
 				return
 			}
-// Note: Bots cannot receive from channels, at least no text messages. 
+// Note: Bots cannot receive from channels, at least no text 
+// messages.
 // So we don't have to distinguish anything here
 
 // display the incoming message
 // msg.Chat implements fmt.Stringer, so it'll display nicely
-// we know it's a text message, so we can safely use the Message.Text 
+// we know it's a text message, so we can safely use the Message.Text
 // pointer
 			fmt.Printf("<-%d, From:\t%s, Text: %s \n", msg.ID, msg.Chat, *msg.Text)
 
@@ -43,7 +44,7 @@ func main() {
 				return
 			}
 			defer file.Close()
-// Note: Set at least a correct file extension, the API will check 
+// Note: Set at least a correct file extension, the API will check
 // this
 			outMsg, err := api.NewOutgoingPhoto(tbotapi.NewRecipientFromChat(msg.Chat), "example.png", file).Send()
 

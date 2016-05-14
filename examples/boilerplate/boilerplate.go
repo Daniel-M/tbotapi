@@ -1,6 +1,6 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights
 // reserved.
-// Use of this source code is governed by the MIT license, which can 
+// Use of this source code is governed by the MIT license, which can
 // be found in
 // the LICENSE file.
 
@@ -22,7 +22,7 @@ type BotFunc func(update tbotapi.Update, api *tbotapi.TelegramBotAPI)
 
 // RunBot runs a bot.
 // THIS IS JUST FOR DEMONSTRATION! NOT TO BE USED IN PRODUCTION!
-// It will block until either something very bad happens or closing 
+// It will block until either something very bad happens or closing
 // is closed.
 func RunBot(apiKey string, bot BotFunc, name, description string) {
 	fmt.Printf("%s: %s\n", name, description)
