@@ -36,16 +36,20 @@ func (u *BotUpdate) Update() Update {
 	return u.update
 }
 
-// Error returns != nil, if an error occurred during retrieval of the update
+// Error returns != nil, if an error occurred during retrieval of the
+// update
 func (u *BotUpdate) Error() error {
 	return u.err
 }
 
 const apiBaseURI string = "https://api.telegram.org/bot%s"
 
-// New creates a new API Client for a Telegram bot using the apiKey provided.
-// It will call the GetMe method to retrieve the bots id, name and username.
-// Additionally, an update loop is started, pumping updates into the Updates channel.
+// New creates a new API Client for a Telegram bot using the apiKey
+// provided.
+// It will call the GetMe method to retrieve the bots id, name and
+// username.
+// Additionally, an update loop is started, pumping updates into the
+// Updates channel.
 func New(apiKey string) (*TelegramBotAPI, error) {
 	toReturn := TelegramBotAPI{
 		Updates:  make(chan BotUpdate),
@@ -68,8 +72,10 @@ func New(apiKey string) (*TelegramBotAPI, error) {
 }
 
 // Close shuts down this client.
-// Until Close returns, new updates and errors will be put into the respective channels.
-// Note that, if no updates are received, this function may block for up to one minute, which is the time interval
+// Until Close returns, new updates and errors will be put into the
+// respective channels.
+// Note that, if no updates are received, this function may block for up to
+// one minute, which is the time interval
 // for long polling.
 func (api *TelegramBotAPI) Close() {
 	select {
@@ -173,9 +179,11 @@ func (api *TelegramBotAPI) GetMe() (*UserResponse, error) {
 	return resp, nil
 }
 
-// GetFile returns a FileResponse containing a Path string needed to download a file.
+// GetFile returns a FileResponse containing a Path string needed to
+// download a file.
 // You will have to construct the download link manually like
-// https://api.telegram.org/file/bot<token>/<file_path>, where <file_path> is taken from the response.
+// https:// api.telegram.org/file/bot<token>/<file_path>, where <file_path>
+// is taken from the response.
 func (api *TelegramBotAPI) GetFile(fileID string) (*FileResponse, error) {
 	resp := &FileResponse{}
 	_, err := api.c.getQuerystring(getFile, resp, map[string]string{"file_id": fileID})
@@ -198,7 +206,8 @@ func check(br *baseResponse) error {
 	return fmt.Errorf("tbotapi: API error: %d - %s", br.ErrorCode, br.Description)
 }
 
-// ErrNoFileSpecified is returned in case neither a file name + io.Reader nor a fileID were specified
+// ErrNoFileSpecified is returned in case neither a file name + io.Reader
+// nor a fileID were specified
 var ErrNoFileSpecified = errors.New("tbotapi: Neither a fileID nor a fileName/reader were specified")
 
 func (api *TelegramBotAPI) send(s sendable) (resp *MessageResponse, err error) {

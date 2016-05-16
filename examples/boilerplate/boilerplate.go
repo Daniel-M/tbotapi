@@ -20,7 +20,8 @@ type BotFunc func(update tbotapi.Update, api *tbotapi.TelegramBotAPI)
 
 // RunBot runs a bot.
 // THIS IS JUST FOR DEMONSTRATION! NOT TO BE USED IN PRODUCTION!
-// It will block until either something very bad happens or closing is closed.
+// It will block until either something very bad happens or closing is
+// closed.
 func RunBot(apiKey string, bot BotFunc, name, description string) {
 	fmt.Printf("%s: %s\n", name, description)
 	fmt.Println("Starting...")

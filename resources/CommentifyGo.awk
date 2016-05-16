@@ -1,5 +1,6 @@
 # This skips the first 4 lines of Copyright
-NR > 4
+{
+if(NR > 4)
 {
 	# Heruistic value for character limit
 	char_limit = 79
@@ -57,6 +58,13 @@ NR > 4
 	else
 	{
 		# print the line as regular
+		gsub(/\w {1,}$/,"",$0)
 		print $0
 	}
+}
+else
+{
+	gsub(/\w {1,}$/,"",$0)
+	print $0
+}
 }

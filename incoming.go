@@ -108,7 +108,8 @@ type File struct {
 	Path string `json:"file_path"`
 }
 
-// FileResponse represents the response sent by the API when requesting a file for download
+// FileResponse represents the response sent by the API when requesting a
+// file for download
 type FileResponse struct {
 	baseResponse
 	File File `json:"result"`
@@ -120,7 +121,8 @@ type Location struct {
 	Latitude  float32 `json:"latitude"`
 }
 
-// MessageResponse represents the response sent by the API on successful messages sent
+// MessageResponse represents the response sent by the API on successful
+// messages sent
 type MessageResponse struct {
 	baseResponse
 	Message Message `json:"result"`
@@ -143,7 +145,8 @@ func (m *Message) IsReply() bool {
 }
 
 // Type determines the type of the message.
-// Note that, for all these types, messages can still be replies or forwarded.
+// Note that, for all these types, messages can still be replies or
+// forwarded.
 func (m *Message) Type() MessageType {
 	if m.Text != nil {
 		return TextMessage
@@ -341,7 +344,8 @@ type Sticker struct {
 	Thumbnail PhotoSize `json:"thumb"`
 }
 
-// UpdateResponse represents the response sent by the API for a GetUpdates request
+// UpdateResponse represents the response sent by the API for a GetUpdates
+// request
 type updateResponse struct {
 	baseResponse
 	Update []Update `json:"result"`
@@ -433,7 +437,8 @@ func (u User) String() string {
 	return fmt.Sprintf("%d/%s", u.ID, u.FirstName)
 }
 
-// UserProfilePhotosResponse represents the response sent by the API on a GetUserProfilePhotos request
+// UserProfilePhotosResponse represents the response sent by the API on a
+// GetUserProfilePhotos request
 type UserProfilePhotosResponse struct {
 	baseResponse
 	UserProfilePhotos UserProfilePhotos `json:"result"`
@@ -471,7 +476,8 @@ type InlineQuery struct {
 	Offset string `json:"offset"` // offset of the results to be returned, can be controlled by the bot
 }
 
-// ChosenInlineResult represents a result of an inline query that was chosen by the user and sent to their chat partner
+// ChosenInlineResult represents a result of an inline query that was
+// chosen by the user and sent to their chat partner
 type ChosenInlineResult struct {
 	ID    string `json:"result_id"` // unique identifier for the result that was chosen
 	From  User   `json:"from"`      // user that chose the result
