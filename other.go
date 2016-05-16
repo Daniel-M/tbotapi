@@ -1,7 +1,5 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
-// reserved.
-// Use of this source code is governed by the MIT license, which can 
-// be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
+// Use of this source code is governed by the MIT license, which can be found in
 // the LICENSE file.
 
 package tbotapi

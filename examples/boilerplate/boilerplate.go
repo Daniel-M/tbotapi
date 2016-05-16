@@ -1,7 +1,5 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights
-// reserved.
-// Use of this source code is governed by the MIT license, which can
-// be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
+// Use of this source code is governed by the MIT license, which can be found in
 // the LICENSE file.
 
 package boilerplate
@@ -22,8 +20,7 @@ type BotFunc func(update tbotapi.Update, api *tbotapi.TelegramBotAPI)
 
 // RunBot runs a bot.
 // THIS IS JUST FOR DEMONSTRATION! NOT TO BE USED IN PRODUCTION!
-// It will block until either something very bad happens or closing
-// is closed.
+// It will block until either something very bad happens or closing is closed.
 func RunBot(apiKey string, bot BotFunc, name, description string) {
 	fmt.Printf("%s: %s\n", name, description)
 	fmt.Println("Starting...")
@@ -33,7 +30,7 @@ func RunBot(apiKey string, bot BotFunc, name, description string) {
 		log.Fatal(err)
 	}
 
-// just to show its working
+	// just to show its working
 	fmt.Printf("User ID: %d\n", api.ID)
 	fmt.Printf("Bot Name: %s\n", api.Name)
 	fmt.Printf("Bot Username: %s\n", api.Username)
@@ -59,7 +56,7 @@ func RunBot(apiKey string, bot BotFunc, name, description string) {
 		}
 	}()
 
-// ensure a clean shutdown
+	// ensure a clean shutdown
 	closing := make(chan struct{})
 	shutdown := make(chan os.Signal)
 	signal.Notify(shutdown, syscall.SIGINT, syscall.SIGTERM)
@@ -73,11 +70,11 @@ func RunBot(apiKey string, bot BotFunc, name, description string) {
 
 	fmt.Println("Bot started. Press CTRL-C to close...")
 
-// wait for the signal
+	// wait for the signal
 	<-closing
 	fmt.Println("Closing...")
 
-// always close the API first, let it clean up the update loop
+	// always close the API first, let it clean up the update loop
 	api.Close() //this might take a while
 	close(closed)
 	wg.Wait()

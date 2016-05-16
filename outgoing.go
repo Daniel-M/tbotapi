@@ -1,7 +1,5 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
-// reserved.
-// Use of this source code is governed by the MIT license, which can 
-// be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
+// Use of this source code is governed by the MIT license, which can be found in
 // the LICENSE file.
 
 package tbotapi
@@ -12,15 +10,13 @@ import (
 	"io"
 )
 
-// outgoingBase contains fields shared by most of the outgoing 
-// requests
+// outgoingBase contains fields shared by most of the outgoing requests
 type outgoingBase struct {
 	api       *TelegramBotAPI
 	Recipient Recipient `json:"chat_id"`
 }
 
-// outgoingMessageBase contains fields shared by most of the outgoing 
-// messages
+// outgoingMessageBase contains fields shared by most of the outgoing messages
 type outgoingMessageBase struct {
 	outgoingBase
 	ReplyToMessageID    int         `json:"reply_to_message_id,omitempty"`
@@ -30,25 +26,21 @@ type outgoingMessageBase struct {
 	replyMarkupSet      bool
 }
 
-// SetDisableNotification sets whether notifications should be disabled 
-// for this
+// SetDisableNotification sets whether notifications should be disabled for this
 // message. (optional)
 func (op *outgoingMessageBase) SetDisableNotification(to bool) {
 	op.DisableNotification = to
 }
 
-// SetReplyToMessageID sets the ID for the message to reply 
-// to (optional)
+// SetReplyToMessageID sets the ID for the message to reply to (optional)
 func (op *outgoingMessageBase) SetReplyToMessageID(to int) {
 	op.ReplyToMessageID = to
 	op.replyToMessageIDSet = true
 }
 
 // SetReplyKeyboardMarkup sets the ReplyKeyboardMarkup (optional)
-// Note that only one of ReplyKeyboardMarkup, ReplyKeyboardHide or 
-// ForceReply can be set.
-// Attempting to set any of the other two or re-setting this will 
-// cause a panic.
+// Note that only one of ReplyKeyboardMarkup, ReplyKeyboardHide or ForceReply can be set.
+// Attempting to set any of the other two or re-setting this will cause a panic.
 func (op *outgoingMessageBase) SetReplyKeyboardMarkup(to ReplyKeyboardMarkup) {
 	if op.replyMarkupSet {
 		panic("Outgoing: Only one of ReplyKeyboardMarkup, ReplyKeyboardHide or ForceReply can be set")
@@ -58,10 +50,8 @@ func (op *outgoingMessageBase) SetReplyKeyboardMarkup(to ReplyKeyboardMarkup) {
 }
 
 // SetReplyKeyboardHide sets the ReplyKeyboardHide (optional)
-// Note that only one of ReplyKeyboardMarkup, ReplyKeyboardHide or 
-// ForceReply can be set.
-// Attempting to set any of the other two or re-setting this will 
-// cause a panic.
+// Note that only one of ReplyKeyboardMarkup, ReplyKeyboardHide or ForceReply can be set.
+// Attempting to set any of the other two or re-setting this will cause a panic.
 func (op *outgoingMessageBase) SetReplyKeyboardHide(to ReplyKeyboardHide) {
 	if !to.HideKeyboard {
 		return
@@ -75,10 +65,8 @@ func (op *outgoingMessageBase) SetReplyKeyboardHide(to ReplyKeyboardHide) {
 }
 
 // SetForceReply sets ForceReply for this message (optional)
-// Note that only one of ReplyKeyboardMarkup, ReplyKeyboardHide or 
-// ForceReply can be set.
-// Attempting to set any of the other two or re-setting this will 
-// cause a panic.
+// Note that only one of ReplyKeyboardMarkup, ReplyKeyboardHide or ForceReply can be set.
+// Attempting to set any of the other two or re-setting this will cause a panic.
 func (op *outgoingMessageBase) SetForceReply(to ForceReply) {
 	if !to.ForceReply {
 		return
@@ -104,8 +92,7 @@ func (op *outgoingBase) getBaseQueryString() querystring {
 	return querystring(toReturn)
 }
 
-// getMessageBaseQueryString gets a Querystring representing this 
-// message
+// getMessageBaseQueryString gets a Querystring representing this message
 func (op *outgoingMessageBase) getBaseQueryString() querystring {
 	toReturn := map[string]string{}
 	if op.Recipient.isChannel() {
@@ -204,8 +191,7 @@ type OutgoingDocument struct {
 	outgoingFileBase
 }
 
-// querystring implements querystringer to represent the outgoing 
-// file
+// querystring implements querystringer to represent the outgoing file
 func (od *OutgoingDocument) querystring() querystring {
 	return od.getBaseQueryString()
 }
@@ -248,8 +234,7 @@ type OutgoingMessage struct {
 	ParseMode             ParseMode `json:"parse_mode,omitempty"`
 }
 
-// SetMarkdown sets or resets whether the message should be 
-// parsed as markdown or plain text (optional)
+// SetMarkdown sets or resets whether the message should be parsed as markdown or plain text (optional)
 func (om *OutgoingMessage) SetMarkdown(to bool) *OutgoingMessage {
 	if to {
 		om.ParseMode = ModeMarkdown
@@ -259,8 +244,7 @@ func (om *OutgoingMessage) SetMarkdown(to bool) *OutgoingMessage {
 	return om
 }
 
-// SetHTML sets or resets whether the message should be parsed 
-// as HTML or plain text (optional)
+// SetHTML sets or resets whether the message should be parsed as HTML or plain text (optional)
 func (om *OutgoingMessage) SetHTML(to bool) *OutgoingMessage {
 	if to {
 		om.ParseMode = ModeHTML
@@ -270,8 +254,7 @@ func (om *OutgoingMessage) SetHTML(to bool) *OutgoingMessage {
 	return om
 }
 
-// SetDisableWebPagePreview disables web page previews for the 
-// message (optional)
+// SetDisableWebPagePreview disables web page previews for the message (optional)
 func (om *OutgoingMessage) SetDisableWebPagePreview(to bool) *OutgoingMessage {
 	om.DisableWebPagePreview = to
 	return om
@@ -307,8 +290,7 @@ type OutgoingSticker struct {
 	outgoingFileBase
 }
 
-// querystring implements querystringer to represent the sticker 
-// message
+// querystring implements querystringer to represent the sticker message
 func (os *OutgoingSticker) querystring() querystring {
 	return os.getBaseQueryString()
 }
@@ -320,16 +302,14 @@ type OutgoingKickChatMember struct {
 	UserID    int       `json:"user_id"`
 }
 
-// OutgoingUnbanChatMember represents a request to unban a chat 
-// member.
+// OutgoingUnbanChatMember represents a request to unban a chat member.
 type OutgoingUnbanChatMember struct {
 	api       *TelegramBotAPI
 	Recipient Recipient `json:"chat_id"`
 	UserID    int       `json:"user_id"`
 }
 
-// OutgoingCallbackQueryResponse represents a response to a callback 
-// query.
+// OutgoingCallbackQueryResponse represents a response to a callback query.
 type OutgoingCallbackQueryResponse struct {
 	api             *TelegramBotAPI
 	CallbackQueryID string `json:"callback_query_id"` // ID of the callback query
@@ -337,8 +317,7 @@ type OutgoingCallbackQueryResponse struct {
 	ShowAlert       bool   `json:"show_alert,omitempty"`
 }
 
-// OutgoingUserProfilePhotosRequest represents a request for a users 
-// profile photos
+// OutgoingUserProfilePhotosRequest represents a request for a users profile photos
 type OutgoingUserProfilePhotosRequest struct {
 	api    *TelegramBotAPI
 	UserID int `json:"user_id"`
@@ -394,8 +373,7 @@ func (ov *OutgoingVideo) SetDuration(to int) *OutgoingVideo {
 	return ov
 }
 
-// querystring implements querystringer to represent the outgoing 
-// video file
+// querystring implements querystringer to represent the outgoing video file
 func (ov *OutgoingVideo) querystring() querystring {
 	toReturn := map[string]string(ov.getBaseQueryString())
 
@@ -423,8 +401,7 @@ func (ov *OutgoingVoice) SetDuration(to int) *OutgoingVoice {
 	return ov
 }
 
-// querystring implements querystringer to represent the outgoing 
-// voice note
+// querystring implements querystringer to represent the outgoing voice note
 func (ov *OutgoingVoice) querystring() querystring {
 	toReturn := map[string]string(ov.getBaseQueryString())
 
@@ -446,14 +423,12 @@ func (ReplyKeyboardMarkup) replyMarkup()  {}
 func (ForceReply) replyMarkup()           {}
 func (InlineKeyboardMarkup) replyMarkup() {}
 
-// InlineKeyboardMarkup represents markup for an inline query 
-// response.
+// InlineKeyboardMarkup represents markup for an inline query response.
 type InlineKeyboardMarkup struct {
 	InlineKeyboard [][]InlineKeyboardButton `json:"inline_keyboard"`
 }
 
-// InlineKeyboardButton represents a button for an inline query 
-// keyboard.
+// InlineKeyboardButton represents a button for an inline query keyboard.
 type InlineKeyboardButton struct {
 	Text              string `json:"text"`
 	URL               string `json:"url,omitempty"`
@@ -461,18 +436,13 @@ type InlineKeyboardButton struct {
 	SwitchInlineQuery string `json:"switch_inline_query,omitempty"`
 }
 
-// ForceReply represents 
-// the values sent by a bot 
-// so that clients will be presented 
-// with a forced reply, see 
-// https://core.telegram.org/bots/api#forcereply
+// ForceReply represents the values sent by a bot so that clients will be presented with a forced reply, see https://core.telegram.org/bots/api#forcereply
 type ForceReply struct {
 	ForceReply bool `json:"force_reply"`
 	Selective  bool `json:"selective"`
 }
 
-// ReplyKeyboardMarkup represents a custom keyboard with reply 
-// options to be presented to clients
+// ReplyKeyboardMarkup represents a custom keyboard with reply options to be presented to clients
 type ReplyKeyboardMarkup struct {
 	Keyboard        [][]KeyboardButton `json:"keyboard"` // slice of keyboard lines
 	ResizeKeyboard  bool               `json:"resize_keyboard"`
@@ -487,8 +457,7 @@ type KeyboardButton struct {
 	RequestLocation bool   `json:"request_location"`
 }
 
-// ReplyKeyboardHide contains the fields necessary to hide a custom 
-// keyboard
+// ReplyKeyboardHide contains the fields necessary to hide a custom keyboard
 type ReplyKeyboardHide struct {
 	HideKeyboard bool `json:"hide_keyboard"`
 	Selective    bool `json:"selective"`
@@ -510,13 +479,10 @@ type OutgoingChatAction struct {
 	Action ChatAction `json:"action"`
 }
 
-// ChatAction represents an action to be shown to clients, indicating 
-// activity of the bot
+// ChatAction represents an action to be shown to clients, indicating activity of the bot
 type ChatAction string
 
-// Represents all the 
-// possible ChatActions 
-// to be sent, see https://core.telegram.org/bots/api#sendchataction
+// Represents all the possible ChatActions to be sent, see https://core.telegram.org/bots/api#sendchataction
 const (
 	ChatActionTyping         ChatAction = "typing"
 	ChatActionUploadPhoto               = "upload_photo"
@@ -560,8 +526,7 @@ type InlineQueryResultBase struct {
 }
 
 // InlineQueryResult is a marker interface for query results.
-// It is implemented 
-// by pointers to InlineQueryResult(Article|Photo|Gif|Mpeg4Gif|Video).
+// It is implemented by pointers to InlineQueryResult(Article|Photo|Gif|Mpeg4Gif|Video).
 type InlineQueryResult interface {
 	result()
 }
@@ -572,8 +537,7 @@ func (*InlineQueryResultGif) result()      {}
 func (*InlineQueryResultMpeg4Gif) result() {}
 func (*InlineQueryResultVideo) result()    {}
 
-// InlineQueryResultArticle represents a link to an article or web 
-// page
+// InlineQueryResultArticle represents a link to an article or web page
 type InlineQueryResultArticle struct {
 	InlineQueryResultBase
 	Title       string `json:"title"`                  // title of the result
@@ -586,8 +550,7 @@ type InlineQueryResultArticle struct {
 	ThumbHeight int    `json:"thumb_height,omitempty"` // thumbnail height (optional)
 }
 
-// NewInlineQueryResultArticle returns a new InlineQueryResultArticle 
-// with all mandatory fields set
+// NewInlineQueryResultArticle returns a new InlineQueryResultArticle with all mandatory fields set
 func NewInlineQueryResultArticle(id, title, text string) *InlineQueryResultArticle {
 	return &InlineQueryResultArticle{
 		InlineQueryResultBase: InlineQueryResultBase{
@@ -599,8 +562,7 @@ func NewInlineQueryResultArticle(id, title, text string) *InlineQueryResultArtic
 	}
 }
 
-// InlineQueryResultFileOptionals contains optional fields that 
-// all inline query file-like results support.
+// InlineQueryResultFileOptionals contains optional fields that all inline query file-like results support.
 type InlineQueryResultFileOptionals struct {
 	Caption string `json:"caption,omitempty"`      // caption of the file to be sent, for limitations check the API documentation (optional)
 	Text    string `json:"message_text,omitempty"` // text of a message to be sent instead of the file, for limitations check the API documentation (optional)
@@ -618,8 +580,7 @@ type InlineQueryResultPhoto struct {
 	InlineQueryResultFileOptionals
 }
 
-// NewInlineQueryResultPhoto returns a new InlineQueryResultPhoto with 
-// all mandatory fields set
+// NewInlineQueryResultPhoto returns a new InlineQueryResultPhoto with all mandatory fields set
 func NewInlineQueryResultPhoto(id, photoURL, thumbURL string) *InlineQueryResultPhoto {
 	return &InlineQueryResultPhoto{
 		InlineQueryResultBase: InlineQueryResultBase{
@@ -642,8 +603,7 @@ type InlineQueryResultGif struct {
 	InlineQueryResultFileOptionals
 }
 
-// NewInlineQueryResultGif returns a new InlineQueryResultGif with 
-// all mandatory fields set
+// NewInlineQueryResultGif returns a new InlineQueryResultGif with all mandatory fields set
 func NewInlineQueryResultGif(id, gifURL, thumbURL string) *InlineQueryResultGif {
 	return &InlineQueryResultGif{
 		InlineQueryResultBase: InlineQueryResultBase{
@@ -655,8 +615,7 @@ func NewInlineQueryResultGif(id, gifURL, thumbURL string) *InlineQueryResultGif 
 	}
 }
 
-// InlineQueryResultMpeg4Gif represents a link to a video animation 
-// (without sound)
+// InlineQueryResultMpeg4Gif represents a link to a video animation (without sound)
 type InlineQueryResultMpeg4Gif struct {
 	InlineQueryResultBase
 	Mpeg4URL    string `json:"mpeg4_url"`              // valid URL for the MP4 file
@@ -667,8 +626,7 @@ type InlineQueryResultMpeg4Gif struct {
 	InlineQueryResultFileOptionals
 }
 
-// NewInlineQueryResultMpeg4Gif returns a new InlineQueryResultMpeg4Gif 
-// with all mandatory fields set
+// NewInlineQueryResultMpeg4Gif returns a new InlineQueryResultMpeg4Gif with all mandatory fields set
 func NewInlineQueryResultMpeg4Gif(id, mpeg4URL, thumbURL string) *InlineQueryResultMpeg4Gif {
 	return &InlineQueryResultMpeg4Gif{
 		InlineQueryResultBase: InlineQueryResultBase{
@@ -704,8 +662,7 @@ type InlineQueryResultVideo struct {
 	InlineQueryResultFileOptionals
 }
 
-// NewInlineQueryResultVideo returns a new InlineQueryResultVideo with 
-// all mandatory fields set
+// NewInlineQueryResultVideo returns a new InlineQueryResultVideo with all mandatory fields set
 func NewInlineQueryResultVideo(id, videoURL, thumbURL, title, text string, mimeType MIMEType) *InlineQueryResultVideo {
 	return &InlineQueryResultVideo{
 		InlineQueryResultBase: InlineQueryResultBase{

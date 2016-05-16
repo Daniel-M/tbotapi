@@ -1,7 +1,5 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
-// reserved.
-// Use of this source code is governed by the MIT license, which can 
-// be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
+// Use of this source code is governed by the MIT license, which can be found in
 // the LICENSE file.
 
 package main
@@ -33,19 +31,19 @@ func main() {
 				return
 			}
 
-// display the incoming message
-// msg.Chat implements fmt.Stringer, so it'll display nicely
-// MessageType implements fmt.Stringer, so it'll display nicely
+			// display the incoming message
+			// msg.Chat implements fmt.Stringer, so it'll display nicely
+			// MessageType implements fmt.Stringer, so it'll display nicely
 			fmt.Printf("<-%d, From:\t%s, Type: %s \n", msg.ID, msg.Chat, typ)
 
-// create a message with some keyboard markup
+			// create a message with some keyboard markup
 			toSend := api.NewOutgoingMessage(tbotapi.NewRecipientFromChat(msg.Chat), "What time is it where I am?")
 			toSend.SetReplyKeyboardMarkup(tbotapi.ReplyKeyboardMarkup{
 				Keyboard:        [][]tbotapi.KeyboardButton{[]tbotapi.KeyboardButton{tbotapi.KeyboardButton{Text: time.Now().Format(time.RFC1123Z)}}},
 				OneTimeKeyboard: true,
 			})
 
-// send it
+			// send it
 			outMsg, err := toSend.Send()
 
 			if err != nil {
@@ -62,6 +60,6 @@ func main() {
 		}
 	}
 
-// run the bot, this will block
+	// run the bot, this will block
 	boilerplate.RunBot(apiToken, updateFunc, "KeyboardMarkup", "Demonstrates keyboard markup")
 }

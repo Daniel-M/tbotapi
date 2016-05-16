@@ -1,7 +1,5 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
-// reserved.
-// Use of this source code is governed by the MIT license, which can 
-// be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
+// Use of this source code is governed by the MIT license, which can be found in
 // the LICENSE file.
 
 package tbotapi
@@ -14,8 +12,7 @@ type Recipient struct {
 	ChannelID *string
 }
 
-// NewChatRecipient creates a new recipient for private or group 
-// chats
+// NewChatRecipient creates a new recipient for private or group chats
 func NewChatRecipient(chatID int) Recipient {
 	return Recipient{
 		ChatID: &chatID,
@@ -29,8 +26,7 @@ func NewChannelRecipient(channelName string) Recipient {
 	}
 }
 
-// NewRecipientFromChat creates a recipient that addresses the given 
-// chat
+// NewRecipientFromChat creates a recipient that addresses the given chat
 func NewRecipientFromChat(chat Chat) Recipient {
 	return NewChatRecipient(chat.ID) //No need to distinguish between channels and chats, bots cannot receive from channels
 }

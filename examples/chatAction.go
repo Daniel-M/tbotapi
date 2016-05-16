@@ -1,7 +1,5 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights
-// reserved.
-// Use of this source code is governed by the MIT license, which can
-// be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
+// Use of this source code is governed by the MIT license, which can be found in
 // the LICENSE file.
 
 package main
@@ -27,14 +25,11 @@ func main() {
 				fmt.Println("Ignoring non-text message")
 				return
 			}
-// Note: Bots cannot receive from channels, at least no text 
-// messages.
-// So we don't have to distinguish anything here
+			// Note: Bots cannot receive from channels, at least no text messages. So we don't have to distinguish anything here
 
-// display the incoming message
-// msg.Chat implements fmt.Stringer, so it'll display nicely
-// we know it's a text message, so we can safely use the Message.Text
-// pointer
+			// display the incoming message
+			// msg.Chat implements fmt.Stringer, so it'll display nicely
+			// we know it's a text message, so we can safely use the Message.Text pointer
 			fmt.Printf("<-%d, From:\t%s, Text: %s \n", msg.ID, msg.Chat, *msg.Text)
 
 			fmt.Printf("Sending ChatActionTyping to %s\n", msg.Chat)
@@ -45,7 +40,7 @@ func main() {
 			}
 			time.Sleep(2 * time.Second)
 
-// clear chat action
+			// clear chat action
 			outMsg, err := api.NewOutgoingMessage(tbotapi.NewRecipientFromChat(msg.Chat), "Finished typing.").Send()
 
 			if err != nil {
@@ -62,7 +57,7 @@ func main() {
 			}
 			time.Sleep(2 * time.Second)
 
-// clear chat action and tell them we're done
+			// clear chat action and tell them we're done
 			outMsg, err = api.NewOutgoingMessage(tbotapi.NewRecipientFromChat(msg.Chat), "Done").Send()
 
 			if err != nil {
@@ -79,6 +74,6 @@ func main() {
 		}
 	}
 
-// run the bot, this will block
+	// run the bot, this will block
 	boilerplate.RunBot(apiToken, updateFunc, "ChatAction", "Demonstrates chat actions")
 }

@@ -1,7 +1,5 @@
-// Copyright 2015-2016 mrd0ll4r and contributors. All rights 
-// reserved.
-// Use of this source code is governed by the MIT license, which can 
-// be found in
+// Copyright 2015-2016 mrd0ll4r and contributors. All rights reserved.
+// Use of this source code is governed by the MIT license, which can be found in
 // the LICENSE file.
 
 package main
@@ -17,8 +15,7 @@ import (
 func main() {
 	apiToken := "123456789:Your_API_token_goes_here"
 
-// Note: For this example to work, you'll have to enable inline 
-// queries for your bot (chat with @BotFather)
+	// Note: For this example to work, you'll have to enable inline queries for your bot (chat with @BotFather)
 
 	updateFunc := func(update tbotapi.Update, api *tbotapi.TelegramBotAPI) {
 		switch update.Type() {
@@ -31,11 +28,11 @@ func main() {
 
 			for i, s := range query.Query {
 				if len(results) >= 50 {
-// the API accepts up to 50 results
+					// the API accepts up to 50 results
 					break
 				}
 				if !unicode.IsSpace(s) {
-// don't set mandatory fields to whitespace
+					// don't set mandatory fields to whitespace
 					results = append(results, tbotapi.NewInlineQueryResultArticle(fmt.Sprint(i), string(s), string(s)))
 				}
 			}
@@ -52,6 +49,6 @@ func main() {
 		}
 	}
 
-// run the bot, this will block
+	// run the bot, this will block
 	boilerplate.RunBot(apiToken, updateFunc, "InlineQuery", "Demonstrates inline queries by splitting words")
 }
