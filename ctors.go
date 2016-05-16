@@ -128,7 +128,8 @@ func (api *TelegramBotAPI) NewOutgoingSticker(recipient Recipient, fileName stri
 	}
 }
 
-// NewOutgoingStickerResend creates a new outgoing sticker message for re-sending
+// NewOutgoingStickerResend creates a new outgoing sticker message for
+// re-sending
 func (api *TelegramBotAPI) NewOutgoingStickerResend(recipient Recipient, fileID string) *OutgoingSticker {
 	return &OutgoingSticker{
 		outgoingMessageBase: outgoingMessageBase{
@@ -261,7 +262,8 @@ func (api *TelegramBotAPI) NewOutgoingChatAction(recipient Recipient, action Cha
 	}
 }
 
-// NewOutgoingUserProfilePhotosRequest creates a new request for a users profile photos
+// NewOutgoingUserProfilePhotosRequest creates a new request for a users
+// profile photos
 func (api *TelegramBotAPI) NewOutgoingUserProfilePhotosRequest(userID int) *OutgoingUserProfilePhotosRequest {
 	return &OutgoingUserProfilePhotosRequest{
 		api:    api,
@@ -269,7 +271,8 @@ func (api *TelegramBotAPI) NewOutgoingUserProfilePhotosRequest(userID int) *Outg
 	}
 }
 
-// NewOutgoingKickChatMember creates a request to kick a member from a group chat or channel.
+// NewOutgoingKickChatMember creates a request to kick a member from a
+// group chat or channel.
 func (api *TelegramBotAPI) NewOutgoingKickChatMember(chat Recipient, userID int) *OutgoingKickChatMember {
 	return &OutgoingKickChatMember{
 		api:       api,
@@ -278,7 +281,8 @@ func (api *TelegramBotAPI) NewOutgoingKickChatMember(chat Recipient, userID int)
 	}
 }
 
-// NewOutgoingUnbanChatMember creates a request to unban a member of a group chat or channel.
+// NewOutgoingUnbanChatMember creates a request to unban a member of a
+// group chat or channel.
 func (api *TelegramBotAPI) NewOutgoingUnbanChatMember(chat Recipient, userID int) *OutgoingUnbanChatMember {
 	return &OutgoingUnbanChatMember{
 		api:       api,
